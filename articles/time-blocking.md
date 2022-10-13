@@ -1,5 +1,4 @@
 ---
-slug: time-blocking
 title: Time Blocking
 excerpt: ช่วยให้เกิด deep work
 ---
