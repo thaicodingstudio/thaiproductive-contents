@@ -55,7 +55,7 @@ jobs:
             FILENAME=${file##*/}
             FILENAME_WITHOUT_EXTENSION=${FILENAME%%.*}
             
-            curl https://www.thaicoding.com/articles/$FILENAME_WITHOUT_EXTENSION
+            curl https://www.thaiproductive.com/articles/$FILENAME_WITHOUT_EXTENSION
           done
           
           for file in ${{ steps.changed-files-specific.outputs.modified_files }}; do
