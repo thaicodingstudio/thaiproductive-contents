@@ -69,5 +69,5 @@ jobs:
             FILENAME_WITHOUT_EXTENSION=${FILENAME%%.*}
             
             # purge KV cache
-            CF_ACCOUNT_ID=${{ secrets.CF_ACCOUNT_ID }} CF_API_TOKEN=${{ secrets.CF_API_TOKEN }} wrangler kv:key delete article:$FILENAME_WITHOUT_EXTENSION --namespace-id=${{ secrets.KV_NAMESPACE_ID }}
+            yes 2>/dev/null | CF_ACCOUNT_ID=${{ secrets.CF_ACCOUNT_ID }} CF_API_TOKEN=${{ secrets.CF_API_TOKEN }} wrangler kv:key delete article:$FILENAME_WITHOUT_EXTENSION --namespace-id=${{ secrets.KV_NAMESPACE_ID }}
           done
