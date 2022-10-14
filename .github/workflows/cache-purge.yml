@@ -31,7 +31,7 @@ jobs:
           node-version: 18
 
       - name: 📥 Install wrangler CLI
-        run: npm i @cloudflare/wrangler -g
+        run: npm i wrangler -g
 
       - name: 📝 Create a mocked wrangler.toml
         run: echo 'type = "javascript"' > wrangler.toml
