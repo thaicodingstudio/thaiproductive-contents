@@ -55,7 +55,11 @@ jobs:
             FILENAME=${file##*/}
             FILENAME_WITHOUT_EXTENSION=${FILENAME%%.*}
             
+            # create article cache
             curl https://www.thaiproductive.com/articles/$FILENAME_WITHOUT_EXTENSION
+            
+            # purge article links cache
+            yes 2>/dev/null | CF_ACCOUNT_ID=${{ secrets.CF_ACCOUNT_ID }} CF_API_TOKEN=${{ secrets.CF_API_TOKEN }} wrangler kv:key delete articleLinks --namespace-id=${{ secrets.KV_NAMESPACE_ID }}
           done
           
           for file in ${{ steps.changed-files-specific.outputs.modified_files }}; do
