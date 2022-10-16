@@ -53,10 +53,13 @@ jobs:
             FILENAME_WITHOUT_EXTENSION=${FILENAME%%.*}
             
             # create article cache
-            curl https://www.thaiproductive.com/articles/$FILENAME_WITHOUT_EXTENSION
+            curl -S -s -o /dev/null https://www.thaiproductive.com/articles/$FILENAME_WITHOUT_EXTENSION
             
             # purge article links cache
             yes 2>/dev/null | CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }} CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} wrangler kv:key delete articleLinks --namespace-id=${{ secrets.KV_NAMESPACE_ID }}
+            
+            # create article links cache
+            curl -S -s -o /dev/null https://www.thaiproductive.com
           done
           
           for file in ${{ steps.changed-files-specific.outputs.modified_files }}; do
@@ -68,4 +71,7 @@ jobs:
             
             # purge KV cache
             yes 2>/dev/null | CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }} CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} wrangler kv:key delete article:$FILENAME_WITHOUT_EXTENSION --namespace-id=${{ secrets.KV_NAMESPACE_ID }}
+            
+            # create article cache
+            curl -S -s -o /dev/null https://www.thaiproductive.com/articles/$FILENAME_WITHOUT_EXTENSION
           done
